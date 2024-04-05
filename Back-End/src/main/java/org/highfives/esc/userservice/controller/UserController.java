@@ -2,6 +2,7 @@ package org.highfives.esc.userservice.controller;
 
 import org.highfives.esc.userservice.dto.UserDTO;
 import org.highfives.esc.userservice.service.UserService;
+import org.highfives.esc.userservice.vo.RigistUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -33,6 +34,13 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.status(HttpStatus.OK).body(users);
+    }
+
+    @PostMapping("/regist")
+    public ResponseEntity<UserDTO> registUser(@RequestBody RigistUser userInfo) {
+        UserDTO userDTO = modelMapper.map(userInfo, UserDTO.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.registUser(userDTO));
     }
 
 
