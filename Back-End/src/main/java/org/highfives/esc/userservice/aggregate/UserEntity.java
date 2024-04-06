@@ -3,12 +3,14 @@ package org.highfives.esc.userservice.aggregate;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "member")
+@DynamicInsert
+@Table(name = "user")
 public class UserEntity {
 
     @Id
@@ -24,22 +26,22 @@ public class UserEntity {
     @Column(nullable = false, name = "nickname")
     private String nickname;
 
-    @Column(nullable = false, name = "status")
+    @Column(name = "status")
     @ColumnDefault("N")
     private String status;
 
     @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "report_count")
+    @Column(name = "report_count")
     @ColumnDefault("0")
     private int reportCount;
 
-    @Column(nullable = false, name = "grade")
+    @Column(name = "grade")
     @ColumnDefault("0")
     private int grade;
 
-    @Column(nullable = false, name = "point")
+    @Column(name = "point")
     @ColumnDefault("0")
     private int point;
 
