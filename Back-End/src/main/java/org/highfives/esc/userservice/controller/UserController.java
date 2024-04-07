@@ -40,7 +40,7 @@ public class UserController {
     public ResponseEntity<UserDTO> registUser(@RequestBody RigistUser userInfo) {
         UserDTO userDTO = modelMapper.map(userInfo, UserDTO.class);
 
-        return ResponseEntity.status(HttpStatus.OK).body(userService.registUser(userDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.registUser(userDTO));
     }
 
 
