@@ -6,9 +6,14 @@ import org.highfives.esc.userservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,16 +21,19 @@ import java.util.stream.Collectors;
 import static java.lang.Long.parseLong;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
     private ModelMapper modelMapper;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -41,6 +49,7 @@ public class UserServiceImpl implements UserService{
 
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
+        userEntity.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
 
         userRepository.save(userEntity);
         Long id = Long.valueOf(userDTO.getId());
@@ -49,10 +58,30 @@ public class UserServiceImpl implements UserService{
         return modelMapper.map(user, UserDTO.class);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
+        UserEntity userEntity = userRepository.findByEmail(email);
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return null;
-//    }
+        if (userEntity == null)
+            throw new UsernameNotFoundException(email + " 아이디의 유저는 존재하지 않음");
+
+        return new User(userEntity.getEmail(), userEntity.getPassword(),
+                true, true, true, true,
+                new ArrayList<>());
+    }
+
+    @Override
+    public UserDTO getUserDetailsByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+
+        if (userEntity == null)
+            throw new UsernameNotFoundException(email + " 아이디의 유저는 존재하지 않음");
+
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
+
+        return userDTO;
+    }
+
 }
