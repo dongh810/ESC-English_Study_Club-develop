@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="logo">
-            <img src="../../assets/ESC_logo.png" class="logoimage">
+            <img src="../../assets/finalLogo.png" class="logoimage">
         </div>
         <div class="menu">
             <span>소개</span>
@@ -17,6 +17,7 @@
 </template>
 
 <script setup>
+    
 
 </script>
 
@@ -54,8 +55,6 @@
         font-style: bold;
         margin-top:53px;
         margin-right: 2%;
-        
-        
     }
 
     .myPageBtn {
@@ -77,9 +76,9 @@
     }
 
     .logo {
-        width:300px;
+        width:120px;
         cursor: pointer;
-        margin-top: 2.5%;
+        margin-top: 1%;
         margin-left: 2%;
         justify-self: start;
     }
@@ -90,6 +89,9 @@
         font-weight: bold;
         margin-right:2%;
         width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        justify-items: center;
         
     }
     .menu span{

@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="logo">
-            <img src="../../assets/ESC_logo.png" class="logoimage">
+            <img src="../../assets/finalLogo.png" class="logoimage">
         </div>
         <div class="menu">
             <span>소개</span>
@@ -10,15 +10,22 @@
             <span>마이페이지</span>
         </div>
         <div class="loginbtndiv">
-            <button type="button" class="signUpBtn" onclick="">sign up</button>
-            <button type="button" class="signInBtn" onclick="">sign in</button>
+            <button type="button" class="signUpBtn" @click="">sign up</button>
+            <button type="button" class="signInBtn"  @click="login()">sign in</button>
         </div> 
 
     </header>
 </template>
 
 <script setup>
+    import router from '@/router/router';
+    import axios from "axios";
+    import { ref, onBeforeMount } from "vue";
+    import {useRoute} from "vue-router";
 
+    function login() {
+        router.push('/login');
+    }
 </script>
 
 <style scoped>
@@ -78,9 +85,9 @@
     }
 
     .logo {
-        width:300px;
+        width:120px;
         cursor: pointer;
-        margin-top: 2.5%;
+        margin-top: 1%;
         margin-left: 2%;
         justify-self: start;
     }
@@ -89,12 +96,12 @@
         text-align: center;
         margin-top:65px;
         font-weight: bold;
-        margin-right:2%;
         width: 100%;
-        
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        justify-items: center;
     }
     .menu span{
-        margin-left: 3%;
         cursor: pointer;
     }
         
