@@ -6,11 +6,11 @@
             </div>
             <div class="idTitle">
                 <h2>아이디</h2>
-                <input type="text" class="idBox" placeholder="아이디를 입력하세요" v-model.trim="member_id">
+                <input type="text" class="idBox" placeholder="아이디를 입력하세요" v-model.trim="email">
             </div>
             <div class="pwdTitle">
                 <h2>비밀번호</h2>
-                <input type="password" class="pwdBox" placeholder="비밀번호를 입력하세요" v-model.trim="member_pwd">
+                <input type="password" class="pwdBox" placeholder="비밀번호를 입력하세요" v-model.trim="password">
             </div>
             <div>
                 <span class="left">회원가입</span>
@@ -19,7 +19,7 @@
                 <span class="right">아이디 찾기</span>           
             </div>
             <div class="logindiv">
-                <button type="button" class="loginBtn" onclick="">로그인</button>
+                <button type="button" class="loginBtn" @click.prevent="[inputCheck(), tokenData()]">로그인</button>
             </div>
         </div>
     </div>
@@ -27,17 +27,21 @@
 
 <script setup>
 import { ref } from 'vue';
-const member_id = ref('');
-const member_pwd = ref('');
+import axios from "axios";
+import { RouterLink } from 'vue-router';
+import router from '@/router/router';
 
-console.log(member_id);
-console.log(member_pwd);
+const email = ref('');
+const password = ref('');
+
+console.log(email);
+console.log(password);
 
 const tokenData = async () => {
-    await axios.post("http://localhost:5173/api/login",
+    await axios.post("/api/login",
     {
-        memberId: member_id.value,
-        memberPwd: member_pwd.value
+        email: email.value,
+        password: password.value
     }).then ((response) => {    // then: post 요청 성공 시 동작할 콜백 함수 등록
         if(response.status == 200) {
             console.log('response status: ', response.status);
@@ -45,9 +49,9 @@ const tokenData = async () => {
 
             // 토큰 및 아이디 로컬 스토리지에 저장
             localStorage.setItem('token', response.headers.token)
-            localStorage.setItem('member_id', member_id.value)
+            localStorage.setItem('email', email.value)
 
-            router.push('/');
+            router.push('/after/login');
         }
     }).catch ((e) => {
         console.log('로그인 실패');
@@ -56,17 +60,17 @@ const tokenData = async () => {
 };
 
 function inputCheck() {
-    if(member_id.value == ''){
+    if(email.value == ''){
         alert('아이디를 입력해주세요.');
         return false;
-    } else if (member_pwd.value == ''){
+    } else if (password.value == ''){
         alert('비밀번호를 입력해주세요.');
         return false;
     } else {
         // 서버 연동하여 토큰값 가져온 후 유효성 검사 코드 추가
         console.log('입력 정보 확인 완료');
-        console.log(member_id.value);
-        console.log(member_pwd.value);
+        console.log(email.value);
+        console.log(password.value);
         return true;
     }
 }
@@ -81,9 +85,9 @@ function inputCheck() {
     }
 
     .login {
-        width:50%;
-        margin-left: 25%;
-        margin-right: 25%;
+        width:40%;
+        margin-left: 30%;
+        margin-right: 30%;
         display: grid;
     }
 
@@ -103,7 +107,7 @@ function inputCheck() {
 
     .idBox {
         width: 100%;
-        height: 50px;
+        height: 40px;
     }
 
     .pwdTitle {
@@ -113,7 +117,7 @@ function inputCheck() {
 
     .pwdBox {
         width: 100%;
-        height: 50px;
+        height: 40px;
     }
 
     .right {
