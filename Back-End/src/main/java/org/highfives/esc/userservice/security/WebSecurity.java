@@ -1,7 +1,6 @@
 package org.highfives.esc.userservice.security;
 
 import jakarta.servlet.Filter;
-import org.hibernate.annotations.Array;
 import org.highfives.esc.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +44,8 @@ public class WebSecurity {
 
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers(new AntPathRequestMatcher("/user/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
+
                 )
                 .authenticationManager(authenticationManager);
 

@@ -59,7 +59,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-//        System.out.println("authResult = " + authResult);
         String email = ((User) authResult.getPrincipal()).getUsername();
 
         System.out.println("시크릿 키: " + environment.getProperty("token.secret"));
@@ -68,9 +67,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         /* 설명. DB를 다녀와 사용자의 고유 아이디(userId)를 가져올 예정(Principal 객체(Authentication)에는 없는 값이므로) */
         UserDTO userDetails = userService.getUserDetailsByEmail(email);
         String userId = userDetails.getEmail();
+        String userNickname = userDetails.getNickname();
 
         String token = Jwts.builder()
                 .setSubject(userId)
+                .claim("userNickname",userNickname)
                 .setExpiration(new Date(System.currentTimeMillis()
                         + Long.valueOf(environment.getProperty("token.expiration_time"))))
                 .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))

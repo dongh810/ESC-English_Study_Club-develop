@@ -1,13 +1,17 @@
 package org.highfives.esc.userservice.controller;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.highfives.esc.userservice.dto.UserDTO;
 import org.highfives.esc.userservice.service.UserService;
+import org.highfives.esc.userservice.vo.ResponseUser;
 import org.highfives.esc.userservice.vo.RigistUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,10 +41,19 @@ public class UserController {
     }
 
     @PostMapping("/regist")
-    public ResponseEntity<UserDTO> registUser(@RequestBody RigistUser userInfo) {
+    public ResponseEntity<ResponseUser> registUser(@RequestBody RigistUser userInfo) {
         UserDTO userDTO = modelMapper.map(userInfo, UserDTO.class);
+        userService.registUser(userDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.registUser(userDTO));
+        ResponseUser responseUser = modelMapper.map(userDTO, ResponseUser.class);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+    }
+
+    @GetMapping("/tokenInfo/{token}")
+    public Claims getTokenInfo(@PathVariable("token") String token) {
+        return userService.getTokenInfo(token);
     }
 
 
