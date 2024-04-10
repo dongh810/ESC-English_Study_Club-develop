@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +53,19 @@ public class UserController {
     @GetMapping("/tokenInfo/{token}")
     public Claims getTokenInfo(@PathVariable("token") String token) {
         return userService.getTokenInfo(token);
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity getUser(@PathVariable("userId") String userId) {
+        UserDTO userDTO = userService.getUserByUserId(userId);
+
+        ResponseUser returnValue = new ModelMapper().map(userDTO, ResponseUser.class);
+
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+        } catch (Exception ex) {
+            throw new RuntimeException();
+        }
     }
 
 

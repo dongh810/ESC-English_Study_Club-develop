@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userRepository.findByEmail(email);
 
         if (userEntity == null)
-            throw new UsernameNotFoundException(email + " 아이디의 유저는 존재하지 않음");
+            throw new UsernameNotFoundException(email + ": not found");
 
         return new User(userEntity.getEmail(), userEntity.getPassword(),
                 true, true, true, true,
@@ -105,6 +105,15 @@ public class UserServiceImpl implements UserService {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+    @Override
+    public UserDTO getUserByUserId(String userId) {
+        UserEntity userEntity = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        UserDTO userDTO = new ModelMapper().map(userEntity, UserDTO.class);
+
+        return userDTO;
     }
 
 
