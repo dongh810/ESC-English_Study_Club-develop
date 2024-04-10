@@ -11,7 +11,7 @@
 <template>
         <Header></Header>
 
-        <main>
+        <main class="wrapper">
             <RouterView />
         </main>
 
@@ -19,5 +19,11 @@
 </template>
 
 <style scoped>
+    .wrapper {
+        width:75%;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+        display: grid;
+    }
 
 </style>

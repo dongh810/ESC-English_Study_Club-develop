@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div>
         <div class="regist">
             <div class="title">
                 <h1>English Study Club</h1>
@@ -50,125 +50,118 @@
 </script>
 
 <style scoped>
-.wrapper {
-        width:75%;
-        margin-left: 12.5%;
-        margin-right: 12.5%;
-        display: grid;
-    }
+.regist {
+    width:40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    display: grid;
+}
 
-    .regist {
-        width:40%;
-        margin-left: 30%;
-        margin-right: 30%;
-        display: grid;
-    }
-
-    .title {
-        text-align: center;
-        margin-top: 5%;
-        font-size: 20px;
-        
-    }
-
-    .idTitle{
-        width: 98%;
-        margin-top: 10%;
-        font-size: 12px;
-    }
-
-    .idBox {
-        width: 98%;
-        height: 30px;
-    }
-
-    .pwdTitle {
-        width: 98%;
-        font-size: 12px;
-    }
-
-    .pwdBox {
-        width: 98%;
-        height: 30px;
-    }
-
-    .registdiv {
-        width:100%;
-        margin-top:20%;
-        margin-bottom: 20%;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        justify-items: center;
-
-    }
-
-    .registBtn {
-        background-color: #515050;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-        font-style: bold;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        grid-column-start: 2;
-	    grid-column-end: 3;
-    }
-
-    .pwdConfirm {
-        width: 98%;
-        font-size: 12px;
-    }
-
-    .emailTitle {
-        width: 98%;
-        font-size: 12px;
-    }
-
-    .certificationTitle {
-        width: 98%;
-        font-size: 12px;
-    }
-
-    .nicknameTitle {
-        width: 98%;
-        font-size: 12px;
-    }
+.title {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 20px;
     
-    .pwdConfirmBox {
-        width: 98%;
-        height: 30px;
-    }
+}
 
-    .emailBox {
-        width: 98%;
-        height: 30px;
-    }
+.idTitle{
+    width: 98%;
+    margin-top: 10%;
+    font-size: 12px;
+}
 
-    .certificationBox {
-        width: 98%;
-        height: 30px;
-    }
+.idBox {
+    width: 98%;
+    height: 30px;
+}
 
-    .nicknameBox {
-        width: 98%;
-        height: 30px;
-    }
+.pwdTitle {
+    width: 98%;
+    font-size: 12px;
+}
 
-    .confirmdiv {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 4.5fr 0.5fr 1fr;
-        justify-items: center;
-    }
+.pwdBox {
+    width: 98%;
+    height: 30px;
+}
 
-    .confirm {
-        width: 100%;
-        grid-column-start: 3;
-	    grid-column-end: 4;
-    }
+.registdiv {
+    width:100%;
+    margin-top:20%;
+    margin-bottom: 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+
+}
+
+.registBtn {
+    background-color: #515050;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-style: bold;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.pwdConfirm {
+    width: 98%;
+    font-size: 12px;
+}
+
+.emailTitle {
+    width: 98%;
+    font-size: 12px;
+}
+
+.certificationTitle {
+    width: 98%;
+    font-size: 12px;
+}
+
+.nicknameTitle {
+    width: 98%;
+    font-size: 12px;
+}
+
+.pwdConfirmBox {
+    width: 98%;
+    height: 30px;
+}
+
+.emailBox {
+    width: 98%;
+    height: 30px;
+}
+
+.certificationBox {
+    width: 98%;
+    height: 30px;
+}
+
+.nicknameBox {
+    width: 98%;
+    height: 30px;
+}
+
+.confirmdiv {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4.5fr 0.5fr 1fr;
+    justify-items: center;
+}
+
+.confirm {
+    width: 100%;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
 </style>

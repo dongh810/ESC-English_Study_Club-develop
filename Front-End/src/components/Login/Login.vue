@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div>
         <div class="login">
             <div class="title">
                 <h1>English Study Club</h1>
@@ -77,94 +77,85 @@ function inputCheck() {
 </script>
 
 <style scoped>
-    .wrapper {
-        width:75%;
-        margin-left: 12.5%;
-        margin-right: 12.5%;
-        display: grid;
-    }
+.login {
+    width:40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    display: grid;
+}
 
-    .login {
-        width:40%;
-        margin-left: 30%;
-        margin-right: 30%;
-        display: grid;
-    }
-
-    .title {
-        text-align: center;
-        margin-top: 5%;
-        font-size: 20px;
-        
-    }
-
-    .idTitle{
-        width: 100%;
-        margin-top: 10%;
-        font-size: 12px;
-
-    }
-
-    .idBox {
-        width: 100%;
-        height: 40px;
-    }
-
-    .pwdTitle {
-        width: 100%;
-        font-size: 12px;
-    }
-
-    .pwdBox {
-        width: 100%;
-        height: 40px;
-    }
-
-    .right {
-        float: right;
-        margin-left: 2%;
-        cursor: pointer;
-    }
-
-    .division {
-        float: right;
-        margin-left: 2%;
-    }
-
-    .left {
-        cursor: pointer;
-    }
-
-    .logindiv {
-        width:100%;
-        margin-top:20%;
-        margin-bottom: 20%;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        justify-items: center;
-
-    }
-
-    .loginBtn {
-        background-color: #515050;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-        font-style: bold;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        grid-column-start: 2;
-	    grid-column-end: 3;
-    }
-
-    .bottomtext {
-        margin-top:1%;
-    }
-
+.title {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 20px;
     
+}
+
+.idTitle{
+    width: 100%;
+    margin-top: 10%;
+    font-size: 12px;
+
+}
+
+.idBox {
+    width: 100%;
+    height: 40px;
+}
+
+.pwdTitle {
+    width: 100%;
+    font-size: 12px;
+}
+
+.pwdBox {
+    width: 100%;
+    height: 40px;
+}
+
+.right {
+    float: right;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.division {
+    float: right;
+    margin-left: 2%;
+}
+
+.left {
+    cursor: pointer;
+}
+
+.logindiv {
+    width:100%;
+    margin-top:20%;
+    margin-bottom: 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+
+}
+
+.loginBtn {
+    background-color: #515050;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-style: bold;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.bottomtext {
+    margin-top:1%;
+}
 </style>
