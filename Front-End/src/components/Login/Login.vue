@@ -12,7 +12,7 @@
                 <h2>비밀번호</h2>
                 <input type="password" class="pwdBox" placeholder="비밀번호를 입력하세요" v-model.trim="password">
             </div>
-            <div>
+            <div class="bottomtext">
                 <span class="left">회원가입</span>
                 <span class="right">비밀번호 찾기</span>
                 <span class="division">|</span>
@@ -160,6 +160,10 @@ function inputCheck() {
         width: 100%;
         grid-column-start: 2;
 	    grid-column-end: 3;
+    }
+
+    .bottomtext {
+        margin-top:1%;
     }
 
     
