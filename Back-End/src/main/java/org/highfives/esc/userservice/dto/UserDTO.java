@@ -2,11 +2,13 @@ package org.highfives.esc.userservice.dto;
 
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class UserDTO {
 
     private int id;

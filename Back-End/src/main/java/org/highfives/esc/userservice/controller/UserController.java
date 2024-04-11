@@ -50,6 +50,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 
+    @GetMapping("/emailCheck/{email}")
+    public String emailCheck(@PathVariable("email") String email) {
+        return userService.emailCheck(email);
+    }
+
     @GetMapping("/tokenInfo/{token}")
     public Claims getTokenInfo(@PathVariable("token") String token) {
         return userService.getTokenInfo(token);

@@ -116,5 +116,16 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
 
+    @Override
+    public String emailCheck(String email) {
+        String check;
+        UserEntity userEntity = userRepository.findByEmail(email);
+        if (userEntity == null){
+            check = "true";
+        } else check = "false";
+
+        return check;
+    }
+
 
 }

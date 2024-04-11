@@ -105,6 +105,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String token = Jwts.builder()
                 .setClaims(claims)
+                .claim("userEmail", userDetails.getEmail())
                 .setExpiration(new Date(System.currentTimeMillis() +
                         Long.parseLong(environment.getProperty("token.expiration_time"))))
                 .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))
@@ -112,5 +113,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader("token", token);
         response.addHeader("userId", userDetails.getEmail());
+        response.addHeader("Set-Cookie",token.toString());
     }
 }

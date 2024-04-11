@@ -2,6 +2,7 @@ package org.highfives.esc.userservice.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,9 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
         System.out.println("UsernamePasswordAuthenticationFilter보다 먼저 동작하는 필터");
+        System.out.println("authorizationHeader ====" + authorizationHeader);
+        Cookie[] cookies = request.getCookies();
+        System.out.println(cookies);
 
         /* 설명. JWT에 헤더가 있는 경우 */
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -40,7 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 System.out.println("JwtFilter 동작 후 관리 될 Authentication(Principal 객체): " + authentication);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-        }
+        } else System.out.println("헤더가 없어용");
         filterChain.doFilter(request, response);
     }
 }

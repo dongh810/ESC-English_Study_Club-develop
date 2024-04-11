@@ -17,4 +17,6 @@ public interface UserService extends UserDetailsService {
     Claims getTokenInfo(String token);
 
     UserDTO getUserByUserId(String userId);
+
+    String emailCheck(String email);
 }
