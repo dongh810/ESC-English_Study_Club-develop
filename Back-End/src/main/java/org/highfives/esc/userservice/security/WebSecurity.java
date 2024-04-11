@@ -60,6 +60,7 @@ public class WebSecurity {
 //                                .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/user/regist", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/user/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/mailSend", "POST")).permitAll()
 //                .requestMatchers("/**").access(
 //                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))
                                 .anyRequest().authenticated()
