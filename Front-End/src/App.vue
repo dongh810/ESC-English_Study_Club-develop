@@ -1,5 +1,5 @@
 <script setup>
-    import Header from "@/components/Header/Logout_Header.vue";
+    import Header from "@/components/Header/Header.vue";
     import Footer from "@/components/Footer/Footer.vue";
 
     import { ref } from 'vue';

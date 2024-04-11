@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="logo">
-            <img src="../../assets/finalLogo.png" class="logoimage">
+            <img src="../../assets/finalLogo.png" @click="main()" class="logoimage">
         </div>
         <div class="menu">
             <span>소개</span>
@@ -9,16 +9,42 @@
             <span>스터디클럽</span>
             <span>마이페이지</span>
         </div>
-        <div class="loginbtndiv">
-            <button type="button" class="logoutBtn" onclick="">logout</button>
+        <div class="loginbtndiv" v-if="token == null">
+            <button type="button" class="signUpBtn" @click="signup()">sign up</button>
+            <button type="button" class="signInBtn"  @click="login()">sign in</button>
+        </div> 
+        <div class="loginbtndiv" v-if="token != null">
+            <button type="button" class="logoutBtn" @click="logout()">logout</button>
             <button type="button" class="myPageBtn" onclick="">my page</button>
         </div>
     </header>
 </template>
 
 <script setup>
-    
+    import router from '@/router/router';
+    import axios from "axios";
+    import { ref, inject } from "vue";
+    import {useRoute} from "vue-router";
 
+    function login() {
+        router.push('/login');
+    }
+
+    function signup() {
+        router.push('/regist');
+    }
+
+    function main() {
+        router.push('/');
+    }
+
+    function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
+        router.push('/login');
+    }
+    const token = ref(localStorage.getItem('token'))
+    
 </script>
 
 <style scoped>
@@ -44,6 +70,34 @@
     text-align: end;
 }
 
+.signInBtn {
+    background-color: #515050;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-style: bold;
+    margin-top:53px;
+    margin-right: 2%;
+    
+    
+}
+
+.signUpBtn {
+    background-color: #515050;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-style: bold;
+    margin-top:53px;    
+    margin-right: 2%;
+}
+
 .logoutBtn {
     background-color: #515050;
     color: white;
@@ -55,6 +109,8 @@
     font-style: bold;
     margin-top:53px;
     margin-right: 2%;
+    
+    
 }
 
 .myPageBtn {
@@ -87,15 +143,12 @@
     text-align: center;
     margin-top:65px;
     font-weight: bold;
-    margin-right:2%;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;
-    
 }
 .menu span{
-    margin-left: 3%;
     cursor: pointer;
-}        
+}
 </style>

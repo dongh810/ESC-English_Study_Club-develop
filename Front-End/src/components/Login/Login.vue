@@ -13,26 +13,31 @@
                 <input type="password" class="pwdBox" placeholder="비밀번호를 입력하세요" v-model.trim="password">
             </div>
             <div class="bottomtext">
-                <span class="left">회원가입</span>
+                <span class="left" @click="signup()">회원가입</span>
                 <span class="right">비밀번호 찾기</span>
                 <span class="division">|</span>
                 <span class="right">아이디 찾기</span>           
             </div>
             <div class="logindiv">
-                <button type="button" class="loginBtn" @click.prevent="[inputCheck(), tokenData()]">로그인</button>
+                <button type="button" class="loginBtn" @click="inputCheck()">로그인</button>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
 import axios from "axios";
 import { RouterLink } from 'vue-router';
 import router from '@/router/router';
 
+
 const email = ref('');
 const password = ref('');
+
+function signup() {
+        router.push('/regist');
+    }
 
 console.log(email);
 console.log(password);
@@ -48,10 +53,11 @@ const tokenData = async () => {
             console.log('response headers: ', response.headers);
 
             // 토큰 및 아이디 로컬 스토리지에 저장
-            localStorage.setItem('token', response.headers.token)
-            localStorage.setItem('email', email.value)
-
-            router.push('/after/login');
+            localStorage.setItem('token', response.headers.token);
+            // localStorage.setItem('email', email.value)
+            
+        
+            router.push('/after/login'); 
         }
     }).catch ((e) => {
         console.log('로그인 실패');
@@ -71,7 +77,7 @@ function inputCheck() {
         console.log('입력 정보 확인 완료');
         console.log(email.value);
         console.log(password.value);
-        return true;
+        return tokenData();
     }
 }
 </script>

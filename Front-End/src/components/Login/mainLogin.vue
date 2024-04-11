@@ -5,6 +5,11 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
+const token = ref(localStorage.getItem('token'));
+console.log(token.value);
+
 
 </script>
 
