@@ -18,8 +18,9 @@
             <div class="certificationTitle">
                 <h2>인증번호</h2>
                 <div class="confirmdiv">
-                    <input type="text" class="certificationBox" placeholder="인증번호를 입력하세요" v-model.trim="certification">
-                    <button class="confirm" @click="">확인</button>
+                    <input type="text" id="certificationBox" class="certificationBox" placeholder="인증번호를 입력하세요" v-model.trim="certification">
+                    <button class="trans" @click="emailSend()">전송</button>
+                    <button class="transconfirm" @click="certificationNumCheck()">확인</button>
                 </div>
             </div>
             <div class="pwdTitle">
@@ -53,6 +54,9 @@ const certification = ref('');
 const passwordConfirm = ref('');
 const memberNickname = ref('');
 let emailcheck = false;
+let certificationNum;
+let NumCheck = false;
+let email;
 
 const regist = async () => {
     await axios.post("/api/user/regist",
@@ -86,6 +90,9 @@ function inputCheck() {
     } else if(emailcheck != true ) {
         alert('이메일 확인버튼을 눌러주세요.');
         return false;
+    } else if(NumCheck != true) {
+        alert('인증번호 확인버튼을 눌러주세요.');
+        return false;
     } else if (memberPassword.value == ''){
         alert('비밀번호를 입력해주세요.');
         return false;
@@ -117,6 +124,29 @@ const emailCheck = async () => {
         }
     })
 };
+
+const emailSend = async () => {
+    console.log(memberEmail.value);
+    await axios.post("/api/mailSend", {email : memberEmail.value})
+    .then(response => {
+        certificationNum = response.data;
+        console.log(certificationNum);
+    })
+}
+
+function certificationNumCheck() {
+    if(certification.value == certificationNum) {
+        alert('인증번호가 일치합니다.');
+        NumCheck = true;
+        let disable = document.querySelector('#certificationBox');
+        disable.disabled = true;
+    }
+    else {
+        alert('인증번호가 일치하지 않습니다.');
+        return false;
+    }
+    
+}
 
 </script>
 
@@ -225,13 +255,26 @@ const emailCheck = async () => {
 .confirmdiv {
     width: 100%;
     display: grid;
-    grid-template-columns: 4.5fr 0.5fr 1fr;
+    grid-template-columns: 4.5fr 0.5fr 1fr 0.2fr 1fr;
     justify-items: center;
 }
+
+.trans {
+    width: 100%;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.transconfirm {
+    width: 100%;
+    grid-column-start: 5;
+    grid-column-end: 6;
+}
+
 
 .confirm {
     width: 100%;
     grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-end: 6;
 }
 </style>
