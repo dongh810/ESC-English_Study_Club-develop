@@ -55,6 +55,16 @@ public class UserController {
         return userService.emailCheck(email);
     }
 
+    @GetMapping("/emailExCheck/{email}")
+    public String emailExCheck(@PathVariable("email") String email) {
+        return userService.emailExCheck(email);
+    }
+
+    @GetMapping("/nicknameCheck/{nickname}")
+    public String nicknameCheck(@PathVariable("nickname") String nickname) {
+        return userService.nicknameCheck(nickname);
+    }
+
     @GetMapping("/tokenInfo/{token}")
     public Claims getTokenInfo(@PathVariable("token") String token) {
         return userService.getTokenInfo(token);
@@ -73,6 +83,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/findId")
+    public ResponseEntity<String> findUserEmail(@RequestParam("name") String name, @RequestParam("nickname") String nickname) {
+        String email = userService.findUserEmail(name, nickname);
+
+        return ResponseEntity.status(HttpStatus.OK).body(email);
+    }
+
+    @GetMapping("/checkUser")
+    public ResponseEntity<String> checkUserEx(@RequestParam("name") String name, @RequestParam("email") String email) {
+        String check = userService.checkUserEx(name, email);
+
+        return ResponseEntity.status(HttpStatus.OK).body(check);
+    }
 
 
 }

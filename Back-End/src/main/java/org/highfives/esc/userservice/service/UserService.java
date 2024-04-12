@@ -19,4 +19,12 @@ public interface UserService extends UserDetailsService {
     UserDTO getUserByUserId(String userId);
 
     String emailCheck(String email);
+
+    String nicknameCheck(String nickname);
+
+    String findUserEmail(String name, String nickname);
+
+    String emailExCheck(String email);
+
+    String checkUserEx(String name, String email);
 }

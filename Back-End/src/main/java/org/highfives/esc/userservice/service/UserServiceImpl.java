@@ -120,12 +120,52 @@ public class UserServiceImpl implements UserService {
     public String emailCheck(String email) {
         String check;
         UserEntity userEntity = userRepository.findByEmail(email);
-        if (userEntity == null){
+        if (userEntity == null) {
             check = "true";
         } else check = "false";
 
         return check;
     }
 
+    @Override
+    public String emailExCheck(String email) {
+        String check;
+        UserEntity userEntity = userRepository.findByEmail(email);
+        if (userEntity.getEmail().equals(email)) {
+            check = "true";
+        } else check = "false";
 
+        return check;
+    }
+
+    @Override
+    public String nicknameCheck(String nickname) {
+        String check;
+        UserEntity userEntity = userRepository.findByNickname(nickname);
+        if (userEntity == null) {
+            check = "true";
+        } else check = "false";
+
+        return check;
+    }
+
+    @Override
+    public String findUserEmail(String name, String nickname) {
+        String email;
+        UserEntity userEntity = userRepository.findByNameAndNickname(name, nickname);
+        email = userEntity.getEmail();
+
+        return email;
+    }
+
+    @Override
+    public String checkUserEx(String name, String email) {
+        String check;
+        UserEntity userEntity = userRepository.findByNameAndEmail(name, email);
+        if (userEntity == null) {
+            check = "true";
+        } else check = "false";
+
+        return check;
+    }
 }
