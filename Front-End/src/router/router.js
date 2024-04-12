@@ -20,6 +20,22 @@ const router = createRouter({
         {
             path: '/regist',
             component: () => import('../views/Regist.vue')
+        },
+        {
+            path: '/findId',
+            component: () => import('../views/FindIdPage.vue')
+        },
+        {
+            path: '/findIdResult/:email',
+            component: () => import('../views/FindIdResultPage.vue')
+        },
+        {
+            path: '/resetPassword',
+            component: () => import('../views/ResetPwdPage.vue')
+        },
+        {
+            path: '/resetPasswordFinal/:email',
+            component: () => import('../views/ResetPwdFinalPage.vue')
         }
     ]
 })

@@ -9,6 +9,7 @@
 </script>
 
 <template>
+    <div class="all">
         <Header></Header>
 
         <main class="wrapper">
@@ -16,6 +17,7 @@
         </main>
 
         <Footer></Footer>  
+    </div>
 </template>
 
 <style scoped>
@@ -24,6 +26,12 @@
         margin-left: 12.5%;
         margin-right: 12.5%;
         display: grid;
+    }
+
+    .all {
+        display: grid;
+        grid-template-rows: 100px minmax(780px, auto) 200px;
+        align-items: center;
     }
 
 </style>

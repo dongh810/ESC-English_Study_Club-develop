@@ -14,9 +14,9 @@
             </div>
             <div class="bottomtext">
                 <span class="left" @click="signup()">회원가입</span>
-                <span class="right">비밀번호 찾기</span>
+                <span class="right" @click="resetPwd()">비밀번호 찾기</span>
                 <span class="division">|</span>
-                <span class="right">아이디 찾기</span>           
+                <span class="right" @click="findId()">아이디 찾기</span>           
             </div>
             <div class="logindiv">
                 <button type="button" class="loginBtn" @click="inputCheck()">로그인</button>
@@ -36,11 +36,12 @@ const email = ref('');
 const password = ref('');
 
 function signup() {
-        router.push('/regist');
-    }
+    router.push('/regist');
+}
 
-console.log(email);
-console.log(password);
+function findId() {
+    router.push('/findId');
+}
 
 const tokenData = async () => {
     await axios.post("/api/login",
@@ -79,6 +80,10 @@ function inputCheck() {
         console.log(password.value);
         return tokenData();
     }
+}
+
+function resetPwd() {
+    router.push('/resetPassword');
 }
 </script>
 

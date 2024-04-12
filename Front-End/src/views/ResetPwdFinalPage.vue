@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper">
         <section>
-            <login></login>
+            <ResetPwdFinal></ResetPwdFinal>
         </section>
     </div>
 </template>
 
 <script setup>
-    import login from '../components/Login/Login.vue';
+    import ResetPwdFinal from '../components/Login/ResetPwdFinal.vue';
 </script>
 
 <style scoped>

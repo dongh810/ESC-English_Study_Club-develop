@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper">
         <section>
-            <login></login>
+            <findId></findId>
         </section>
     </div>
 </template>
 
 <script setup>
-    import login from '../components/Login/Login.vue';
+    import findId from '../components/Login/FindId.vue';
 </script>
 
 <style scoped>
