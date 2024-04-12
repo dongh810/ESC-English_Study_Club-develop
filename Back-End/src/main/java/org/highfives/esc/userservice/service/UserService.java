@@ -2,6 +2,7 @@ package org.highfives.esc.userservice.service;
 
 import io.jsonwebtoken.Claims;
 import org.highfives.esc.userservice.dto.UserDTO;
+import org.highfives.esc.userservice.vo.ResetPwd;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
@@ -27,4 +28,6 @@ public interface UserService extends UserDetailsService {
     String emailExCheck(String email);
 
     String checkUserEx(String name, String email);
+
+    String resetPassword(ResetPwd resetPwd);
 }

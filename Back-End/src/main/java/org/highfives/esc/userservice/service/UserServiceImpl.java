@@ -7,6 +7,7 @@ import org.highfives.esc.userservice.aggregate.UserEntity;
 import org.highfives.esc.userservice.dto.UserDTO;
 import org.highfives.esc.userservice.repository.UserRepository;
 import org.highfives.esc.userservice.security.JwtUtil;
+import org.highfives.esc.userservice.vo.ResetPwd;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,9 +163,29 @@ public class UserServiceImpl implements UserService {
     public String checkUserEx(String name, String email) {
         String check;
         UserEntity userEntity = userRepository.findByNameAndEmail(name, email);
-        if (userEntity == null) {
+        if (userEntity != null) {
             check = "true";
         } else check = "false";
+
+        return check;
+    }
+
+    @Override
+    public String resetPassword(ResetPwd resetPwd) {
+        String check;
+        String email = resetPwd.getEmail();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        UserEntity userEntity = userRepository.findByEmail(email);
+
+
+        if(encoder.matches(resetPwd.getPassword(), userEntity.getPassword())){
+            check = "false";
+        }
+        else {
+            check = "true";
+            userEntity.setPassword(bCryptPasswordEncoder.encode(resetPwd.getPassword()));
+            userRepository.save(userEntity);
+        }
 
         return check;
     }

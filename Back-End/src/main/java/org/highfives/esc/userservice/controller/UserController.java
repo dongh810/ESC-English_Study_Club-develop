@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.highfives.esc.userservice.dto.UserDTO;
 import org.highfives.esc.userservice.service.UserService;
+import org.highfives.esc.userservice.vo.ResetPwd;
 import org.highfives.esc.userservice.vo.ResponseUser;
 import org.highfives.esc.userservice.vo.RigistUser;
 import org.modelmapper.ModelMapper;
@@ -93,6 +94,14 @@ public class UserController {
     @GetMapping("/checkUser")
     public ResponseEntity<String> checkUserEx(@RequestParam("name") String name, @RequestParam("email") String email) {
         String check = userService.checkUserEx(name, email);
+
+        return ResponseEntity.status(HttpStatus.OK).body(check);
+    }
+
+    @PostMapping("/resetPassword")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPwd resetPwd) {
+
+       String check = userService.resetPassword(resetPwd);
 
         return ResponseEntity.status(HttpStatus.OK).body(check);
     }
