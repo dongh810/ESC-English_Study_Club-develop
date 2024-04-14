@@ -9,22 +9,33 @@
             <span>스터디클럽</span>
             <span>마이페이지</span>
         </div>
-        <div class="loginbtndiv" v-if="token == null">
-            <button type="button" class="signUpBtn" @click="signup()">sign up</button>
-            <button type="button" class="signInBtn"  @click="login()">sign in</button>
-        </div> 
-        <div class="loginbtndiv" v-if="token != null">
+        <div class="loginbtndiv" v-if="isLoggedIn">
             <button type="button" class="logoutBtn" @click="logout()">logout</button>
             <button type="button" class="myPageBtn" onclick="">my page</button>
         </div>
+        <div class="loginbtndiv" v-else>
+            <button type="button" class="signUpBtn" @click="signup()">sign up</button>
+            <button type="button" class="signInBtn"  @click="login()">sign in</button>
+        </div> 
+        
     </header>
 </template>
 
 <script setup>
     import router from '@/router/router';
-    import axios from "axios";
-    import { ref, inject } from "vue";
-    import {useRoute} from "vue-router";
+    import { ref, computed, watch, reactive, onMounted } from "vue";
+
+    const token = ref(localStorage.getItem('token'));
+
+// 로그인 여부 계산
+    const isLoggedIn = ref(!!token.value);
+
+    // 페이지 로드 시 초기화
+    onMounted(() => {
+    // 로컬 스토리지에서 토큰 값을 가져와서 로그인 여부 갱신
+        token.value = localStorage.getItem('token');
+        isLoggedIn.value = !!token.value;
+    });
 
     function login() {
         router.push('/login');
@@ -41,10 +52,12 @@
     function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('email');
+        token.value = null; // 토큰 값 갱신
+        isLoggedIn.value = false; // 로그인 여부 갱신
         router.push('/login');
     }
-    const token = ref(localStorage.getItem('token'))
-    
+
+
 </script>
 
 <style scoped>
