@@ -91,24 +91,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Claims getTokenInfo(String token) {
-        Claims claims = parseClaims(token);
-        System.out.println(claims.getSubject());
-        System.out.println(claims.get("userNickname"));
-
-
-        return claims;
-    }
-
-    public Claims parseClaims(String token) {
-        try {
-            return Jwts.parserBuilder().setSigningKey(environment.getProperty("token.secret")).build().parseClaimsJws(token).getBody();
-        } catch (ExpiredJwtException e) {
-            return e.getClaims();
-        }
-    }
-
-    @Override
     public UserDTO getUserByUserId(String userId) {
         UserEntity userEntity = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 

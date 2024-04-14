@@ -66,14 +66,9 @@ public class UserController {
         return userService.nicknameCheck(nickname);
     }
 
-    @GetMapping("/tokenInfo/{token}")
-    public Claims getTokenInfo(@PathVariable("token") String token) {
-        return userService.getTokenInfo(token);
-    }
-
-    @GetMapping("/users/{userId}")
-    public ResponseEntity getUser(@PathVariable("userId") String userId) {
-        UserDTO userDTO = userService.getUserByUserId(userId);
+    @GetMapping("/info/{userId}")
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) {
+        UserDTO userDTO = userService.getUserDetailsByEmail(userId);
 
         ResponseUser returnValue = new ModelMapper().map(userDTO, ResponseUser.class);
 
