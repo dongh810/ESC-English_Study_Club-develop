@@ -1,8 +1,6 @@
 <script setup>
     import Header from "@/components/Header/Header.vue";
     import Footer from "@/components/Footer/Footer.vue";
-
-    import { ref } from 'vue';
     import { RouterLink, RouterView, useRouter } from 'vue-router';
 
     const router = useRouter();
