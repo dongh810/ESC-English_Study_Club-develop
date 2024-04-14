@@ -1,18 +1,13 @@
 package org.highfives.esc.userservice.service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
 import org.highfives.esc.userservice.aggregate.UserEntity;
 import org.highfives.esc.userservice.dto.UserDTO;
 import org.highfives.esc.userservice.repository.UserRepository;
-import org.highfives.esc.userservice.security.JwtUtil;
 import org.highfives.esc.userservice.vo.ResetPwd;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +26,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private ModelMapper modelMapper;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     private Environment environment;
 
 
@@ -87,15 +79,6 @@ public class UserServiceImpl implements UserService {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
         System.out.println(userDTO);
-        return userDTO;
-    }
-
-    @Override
-    public UserDTO getUserByUserId(String userId) {
-        UserEntity userEntity = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        UserDTO userDTO = new ModelMapper().map(userEntity, UserDTO.class);
-
         return userDTO;
     }
 
